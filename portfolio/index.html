@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Midhun V | SOC Analyst Command Center</title>
+
+  <!-- SEO & Meta Tags -->
+  <meta name="description"
+    content="Cybersecurity portfolio of Midhun V. Explore my SOC operations, threat detection case files, and security certifications.">
+  <meta property="og:title" content="Midhun V | SOC Analyst Command Center">
+  <meta property="og:description"
+    content="Cybersecurity portfolio of Midhun V. Explore my SOC operations, threat detection case files, and security certifications.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Midhun V | SOC Analyst Command Center">
+  <meta name="twitter:description"
+    content="Cybersecurity portfolio of Midhun V. Explore my SOC operations, threat detection case files, and security certifications.">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="assets/images/favicon.png">
+  <link rel="apple-touch-icon" href="assets/images/favicon.png">
+
+  <!-- Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght@300;400;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- AOS CSS -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <!-- Boxicons for UI Icons -->
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <!-- Background Elements -->
+  <div class="cyber-grid"></div>
+  <div id="particles-js"></div>
+  <div class="cursor-glow"></div>
+
+  <!-- Scroll Progress -->
+  <div id="scroll-progress"></div>
+
+  <!-- Boot Sequence Overlay -->
+  <div id="boot-sequence">
+    <div class="boot-terminal">
+      <div class="boot-header">
+        <span></span><span></span><span></span>
+        <div class="boot-title">SYS_INIT :: SOC_ENV</div>
+      </div>
+      <pre id="boot-text"></pre>
+    </div>
+  </div>
+
+  <!-- Top SIEM Navigation Bar -->
+  <nav class="siem-nav">
+    <div class="nav-brand">
+      <i class='bx bx-radar bx-spin' style='color:#00ffcc'></i>
+      <span>MV_SOC_ENV</span>
+    </div>
+    <div class="nav-status">
+      <span class="status-indicator online"></span>
+      <span class="status-text">SYSTEM ONLINE</span>
+      <span class="time-display" id="sys-time">00:00:00 UTC</span>
+    </div>
+
+    <!-- Mobile Menu Button -->
+    <button aria-expanded="false" aria-label="Toggle navigation" class="menu-toggle-btn" id="mobile-menu-btn">
+      <i class='bx bx-menu'></i>
+    </button>
+
+    <div class="nav-links" id="nav-links">
+      <a href="#dashboard" aria-label="Go to Dashboard">Dashboard</a>
+      <a href="#investigations" aria-label="Go to Investigations">Investigations</a>
+      <a href="#clearance" aria-label="Go to Clearance">Clearance</a>
+      <a href="assets/Midhun_V_Cybersecurity_Resume.pdf" class="btn-neon" target="_blank" rel="noopener noreferrer"
+        aria-label="Export Resume">Export_Resume()</a>
+    </div>
+  </nav>
+
+  <main>
+    <!-- HERO: SOC Command Center -->
+    <header class="hero section" id="home" data-section="home">
+      <div class="hero-container">
+        <div class="hero-main" data-aos="fade-right">
+          <h1 class="glitch-text" data-text="Midhun V">Midhun V</h1>
+          <div class="role-container">
+            <span class="prefix">role@sys:~$</span>
+            <span id="role-typewriter"></span><span class="cursor-blink">_</span>
+          </div>
+          <p class="hero-summary">
+            Computer Science student building a foundation in cybersecurity. Learning SOC operations, threat detection
+            techniques, and cloud security environments through practical exposure and coursework. Passionate about
+            understanding how to protect and defend systems.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#dashboard" class="cyber-btn primary" aria-label="Initiate Session">
+              <span class="btn-text">INITIATE_SESSION</span>
+              <span class="btn-glitch"></span>
+            </a>
+            <div class="social-links-hero">
+              <a href="https://github.com/whitehatwolf" target="_blank" rel="noopener noreferrer"
+                aria-label="GitHub Profile"><i class='bx bxl-github'></i></a>
+              <a href="https://linkedin.com/in/midhun-v-042453376" target="_blank" rel="noopener noreferrer"
+                aria-label="LinkedIn Profile"><i class='bx bxl-linkedin-square'></i></a>
+              <a href="https://tryhackme.com/p/WhiteHatWolf" target="_blank" rel="noopener noreferrer"
+                aria-label="TryHackMe Profile"><img src="https://assets.tryhackme.com/img/logo/tryhackme_logo_full.svg"
+                  alt="TryHackMe badge" class="thm-badge" loading="lazy" decoding="async" /></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-widgets" data-aos="fade-left" data-aos-delay="200">
+          <!-- Live Log Stream widget -->
+          <div class="widget log-widget">
+            <div class="widget-header">
+              <i class='bx bx-list-ul'></i> Live Activity Feed
+            </div>
+            <div class="widget-body" id="live-logs">
+              <!-- Populated by JS -->
+            </div>
+            <div
+              style="font-size: 0.75rem; color: rgba(148, 163, 184, 0.7); padding: 8px; text-align: center; border-top: 1px solid rgba(0, 255, 204, 0.1);">
+              Telemetry shown is simulated for demonstration purposes.
+            </div>
+          </div>
+
+          <!-- Stat Widgets -->
+          <div class="stat-grid">
+            <div class="stat-box">
+              <div class="stat-value" data-target="500">0</div>
+              <div class="stat-label">Security Events Reviewed</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-value" data-target="150">0</div>
+              <div class="stat-label">Labs Completed</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-value" data-target="3">0</div>
+              <div class="stat-label">Certifications Earned</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-value" data-target="12">0</div>
+              <div class="stat-label">Detection Rules Created</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- SIEM DASHBOARD SECTION -->
+    <section class="dashboard-section section" id="dashboard" data-section="dashboard">
+      <div class="section-header" data-aos="fade-up">
+        <h2><span class="highlight">/</span> Security Operations Dashboard</h2>
+        <p>System Telemetry & Threat Metrics</p>
+      </div>
+
+      <div class="siem-grid">
+        <!-- Radar Chart -->
+        <div class="siem-panel" data-aos="fade-up" data-aos-delay="100">
+          <div class="panel-header">
+            <i class='bx bx-radar'></i> Security Stack Analysis
+          </div>
+          <div class="panel-content chart-container">
+            <canvas id="skillsRadar"></canvas>
+          </div>
+        </div>
+
+        <!-- Tech Stack List -->
+        <div class="siem-panel" data-aos="fade-up" data-aos-delay="200">
+          <div class="panel-header">
+            <i class='bx bx-layer'></i> Deployed Tools & Platforms
+          </div>
+          <div class="panel-content skills-list">
+            <div class="skill-category">
+              <span class="cat-name">SIEM & Monitoring</span>
+              <div class="skill-tags">
+                <span>Splunk</span><span>Azure Sentinel</span><span>ELK Stack</span>
+              </div>
+            </div>
+            <div class="skill-category">
+              <span class="cat-name">Offensive / DefTools</span>
+              <div class="skill-tags">
+                <span>Burp Suite</span><span>Nmap</span><span>Metasploit</span><span>Wireshark</span>
+              </div>
+            </div>
+            <div class="skill-category">
+              <span class="cat-name">Infrastructure</span>
+              <div class="skill-tags">
+                <span>Docker</span><span>Linux</span><span>Azure Cloud</span><span>Cowrie</span>
+              </div>
+            </div>
+            <div class="skill-category">
+              <span class="cat-name">Concepts</span>
+              <div class="skill-tags">
+                <span>Incident Response</span><span>Log Analysis</span><span>MITRE ATT&CK</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INVESTIGATIONS (Projects) -->
+    <section class="investigations section" id="investigations" data-section="investigations">
+      <div class="section-header" data-aos="fade-up">
+        <h2><span class="highlight">/</span> Security Investigations</h2>
+        <p>Case Files & Incident Reports</p>
+      </div>
+
+      <div class="case-grid">
+        <!-- Project 1 -->
+        <div class="case-card" data-aos="zoom-in" data-aos-delay="100">
+          <div class="case-severity high">SEV: HIGH</div>
+          <div class="case-header">
+            <h3>Cowrie Honeypot Simulation</h3>
+            <span class="case-id">CASE# 0x01</span>
+          </div>
+          <div class="case-body">
+            <p>Deployed SSH honeypot using Docker to capture brute-force attempts and log attacker behavior.</p>
+            <div class="mitre-tags">
+              <span>T1110: Brute Force</span>
+              <span>T1059: Command CLI</span>
+            </div>
+            <ul class="investigation-steps">
+              <li><i class='bx bx-check-circle'></i> SHA-256 credential hashing</li>
+              <li><i class='bx bx-check-circle'></i> IP & pattern analysis</li>
+              <li><i class='bx bx-check-circle'></i> Attack visibility mapping</li>
+            </ul>
+          </div>
+          <div class="case-footer">
+            <a href="https://github.com/WhiteHatWolf/cowrie-honeypot-project" target="_blank" rel="noopener noreferrer"
+              aria-label="Access Cowrie Honeypot Report" class="cyber-link">Access
+              Report <i class='bx bx-right-arrow-alt'></i></a>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="case-card" data-aos="zoom-in" data-aos-delay="200">
+          <div class="case-severity critical">SEV: CRIT</div>
+          <div class="case-header">
+            <h3>AI-Based IDS & Log Analysis</h3>
+            <span class="case-id">CASE# 0x02</span>
+          </div>
+          <div class="case-body">
+            <p>Analyzes server logs for malicious activity detecting SQLi, XSS, brute force & path traversal.</p>
+            <div class="mitre-tags">
+              <span>T1190: Exploit Public App</span>
+              <span>T1078: Valid Accounts</span>
+            </div>
+            <ul class="investigation-steps">
+              <li><i class='bx bx-check-circle'></i> ML-based SQLi detection</li>
+              <li><i class='bx bx-check-circle'></i> Rule-based XSS detection</li>
+              <li><i class='bx bx-check-circle'></i> Visual threat summary</li>
+            </ul>
+          </div>
+          <div class="case-footer">
+            <a href="https://github.com/WhiteHatWolf/AI-Log-Analysis-IDS" target="_blank" rel="noopener noreferrer"
+              aria-label="Access AI Log Analysis Report" class="cyber-link">Access Report
+              <i class='bx bx-right-arrow-alt'></i></a>
+          </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="case-card" data-aos="zoom-in" data-aos-delay="300">
+          <div class="case-severity med">SEV: MED</div>
+          <div class="case-header">
+            <h3>Multithreaded TCP Port Scanner</h3>
+            <span class="case-id">CASE# 0x03</span>
+          </div>
+          <div class="case-body">
+            <p>Educational TCP port scanning tool built for network enumeration and security testing in authorized lab
+              environments.</p>
+            <div class="mitre-tags">
+              <span>T1046: Network Service Scan</span>
+            </div>
+            <ul class="investigation-steps">
+              <li><i class='bx bx-check-circle'></i> Parallel thread execution</li>
+              <li><i class='bx bx-check-circle'></i> Timeout handling</li>
+              <li><i class='bx bx-check-circle'></i> Target host discovery</li>
+            </ul>
+          </div>
+          <div class="case-footer">
+            <a href="https://github.com/WhiteHatWolf/WHW-Tools" target="_blank" rel="noopener noreferrer"
+              aria-label="Access Port Scanner Report" class="cyber-link">Access Report <i
+                class='bx bx-right-arrow-alt'></i></a>
+          </div>
+        </div>
+
+        <!-- Project 4 -->
+        <div class="case-card" data-aos="zoom-in" data-aos-delay="400">
+          <div class="case-severity low">SEV: LOW</div>
+          <div class="case-header">
+            <h3>Password Breach Checker</h3>
+            <span class="case-id">CASE# 0x04</span>
+          </div>
+          <div class="case-body">
+            <p>Checks if a password appears in known breaches using secure SHA-1 hash comparison.</p>
+            <div class="mitre-tags">
+              <span>T1555: Credentials from Passwords</span>
+            </div>
+            <ul class="investigation-steps">
+              <li><i class='bx bx-check-circle'></i> Query breach API</li>
+              <li><i class='bx bx-check-circle'></i> Secure comparison without reveal</li>
+            </ul>
+          </div>
+          <div class="case-footer">
+            <a href="https://github.com/WhiteHatWolf/Password-Breach-Checker" target="_blank" rel="noopener noreferrer"
+              aria-label="Access Password Breach Checker Report" class="cyber-link">Access
+              Report <i class='bx bx-right-arrow-alt'></i></a>
+          </div>
+        </div>
+
+        <!-- Project 5 -->
+        <div class="case-card" data-aos="zoom-in" data-aos-delay="500">
+          <div class="case-severity info">SEV: INFO</div>
+          <div class="case-header">
+            <h3>TryHackMe Writeups</h3>
+            <span class="case-id">CASE# 0x05</span>
+          </div>
+          <div class="case-body">
+            <p>Documented hands-on cybersecurity labs covering web, network & privilege escalation.</p>
+            <div class="mitre-tags">
+              <span>Training & Simulation</span>
+            </div>
+            <ul class="investigation-steps">
+              <li><i class='bx bx-check-circle'></i> Attack methodology breakdown</li>
+              <li><i class='bx bx-check-circle'></i> Tool command documentation</li>
+            </ul>
+          </div>
+          <div class="case-footer">
+            <a href="https://github.com/WhiteHatWolf/tryhackme-writeups" target="_blank" rel="noopener noreferrer"
+              aria-label="Access TryHackMe Writeups Report" class="cyber-link">Access Report
+              <i class='bx bx-right-arrow-alt'></i></a>
+          </div>
+        </div>
+
+        <!-- Project 6 -->
+        <div class="case-card compact" data-aos="zoom-in" data-aos-delay="600">
+
+          <div class="case-severity med">SEV: MED</div>
+
+          <div class="case-header">
+            <h3>ASA Firewall (Packet Tracer)</h3>
+            <span class="case-id">CASE# 0x06</span>
+          </div>
+
+          <div class="case-body">
+
+            <p>
+              Configured Cisco ASA firewall with Inside, DMZ, and Outside zones. Implemented NAT and ACLs for traffic
+              segmentation and filtering.
+            </p>
+
+            <div class="mitre-tags">
+              <span>Firewall</span>
+              <span>NAT</span>
+              <span>ACLs</span>
+              <span>Segmentation</span>
+            </div>
+
+            <ul class="investigation-steps">
+              <li><i class='bx bx-check-circle'></i> ASA firewall configured</li>
+              <li><i class='bx bx-check-circle'></i> NAT & ACL rules applied</li>
+              <li><i class='bx bx-check-circle'></i> DMZ / Inside / Outside setup</li>
+            </ul>
+
+          </div>
+
+          <div class="case-footer">
+            <a href="https://github.com/WhiteHatWolf/Cisco-ASA-Firewall-Packet-Tracer" target="_blank"
+              rel="noopener noreferrer" class="cyber-link">
+              Access Report <i class='bx bx-right-arrow-alt'></i>
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CLEARANCE (Certifications) & TRYHACKME -->
+    <section class="clearance-section section" id="clearance" data-section="clearance">
+      <div class="section-header" data-aos="fade-up">
+        <h2><span class="highlight">/</span> Cyber Clearance Badges</h2>
+        <p>Verified Credentials & Live Telemetry</p>
+      </div>
+
+      <div class="clearance-container">
+        <!-- Certifications -->
+        <div class="cert-panel">
+          <div class="badge-card" data-aos="fade-right" data-aos-delay="300">
+            <div class="badge-scan-line"></div>
+            <div class="badge-icon fortinet">
+              <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/fortinet.svg" alt="Fortinet"
+                loading="lazy" decoding="async"
+                style="width: 40px; height: 40px; filter: invert(15%) sepia(89%) saturate(4645%) hue-rotate(345deg) brightness(93%) contrast(105%);">
+            </div>
+            <div class="badge-info">
+              <h4>Fortinet Certified Fundamentals</h4>
+              <p>Hands-on secure score evaluation & alert mitigation.</p>
+              <a href="https://www.credly.com/badges/bb53278e-85f5-456a-b615-90c681a3f91b/public_url" target="_blank"
+                rel="noopener noreferrer" aria-label="Verify Fortinet Certification" class="verify-status verified"><i
+                  class='bx bx-check-shield'></i> Verified Active</a>
+            </div>
+          </div>
+
+          <div class="badge-card" data-aos="fade-right" data-aos-delay="100">
+            <div class="badge-scan-line"></div>
+            <div class="badge-icon ms">
+              <i class='bx bxl-microsoft'></i>
+            </div>
+            <div class="badge-info">
+              <h4>Microsoft Applied Skills</h4>
+              <p>Build a Generative AI Chat Application using Azure AI services and modern cloud technologies.</p>
+              <a href="https://learn.microsoft.com/api/credentials/share/en-in/MidhunV-9469/38B6E9BE6F8909FC?sharingId=6D3374251A3BEDA7"
+                target="_blank" rel="noopener noreferrer" aria-label="Verify Microsoft Certification"
+                class="verify-status verified"><i class='bx bx-check-shield'></i> Verified Active</a>
+            </div>
+          </div>
+
+          <div class="badge-card" data-aos="fade-right" data-aos-delay="200">
+            <div class="badge-scan-line"></div>
+            <div class="badge-icon ibm">
+              <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/ibm.svg" alt="IBM" loading="lazy"
+                decoding="async"
+                style="width: 45px; height: 45px; filter: invert(34%) sepia(91%) saturate(2206%) hue-rotate(213deg) brightness(105%) contrast(103%);">
+            </div>
+            <div class="badge-info">
+              <h4>IBM Cybersecurity Fundamentals</h4>
+              <p>Threat detection, risk mitigation, and security best practices.</p>
+              <a href="https://www.credly.com/badges/10ce713c-ff70-4373-9927-598162c1cdf4/public_url" target="_blank"
+                rel="noopener noreferrer" aria-label="Verify IBM Certification" class="verify-status verified"><i
+                  class='bx bx-check-shield'></i> Verified Active</a>
+            </div>
+          </div>
+
+          <div class="badge-card" data-aos="fade-right" data-aos-delay="100">
+            <div class="badge-scan-line"></div>
+            <div class="badge-icon cisco">
+              <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/cisco.svg" alt="Cisco"
+                loading="lazy" decoding="async"
+                style="width: 45px; height: 45px; filter: invert(34%) sepia(91%) saturate(2206%) hue-rotate(213deg) brightness(105%) contrast(103%);">
+            </div>
+            <div class="badge-info">
+              <h4>Cisco</h4>
+              <p>Junior Cybersecurity Analyst Career Path</p>
+              <a href="https://www.credly.com/badges/855c5f51-9d4d-47db-96e1-613aa2dd45eb/public_url" target="_blank"
+                rel="noopener noreferrer" aria-label="Verify Cisco Certification" class="verify-status verified"><i
+                  class='bx bx-check-shield'></i> Verified Active</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- TryHackMe Live Telemetry -->
+        <div class="telemetry-panel" data-aos="fade-left" data-aos-delay="200">
+          <div class="panel-header">
+            <i class='bx bx-pulse'></i> THM Telemetry Node
+          </div>
+          <div class="panel-content">
+
+            <!-- THM Profile -->
+            <div class="thm-wrapper" id="thm-wrapper">
+              <div class="scan-overlay"></div>
+              <div class="thm-skeleton"></div>
+              <iframe src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=4133215" loading="lazy"
+                referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin"
+                onload="this.classList.add('loaded')"></iframe>
+            </div>
+            <div class="auth-nodes">
+              <a href="https://tryhackme.com/p/WhiteHatWolf" target="_blank" rel="noopener noreferrer" class="node-link"
+                aria-label="TryHackMe Profile">
+                <img src="https://assets.tryhackme.com/img/logo/tryhackme_logo_full.svg" alt="TryHackMe badge"
+                  class="thm-badge" /> TryHackMe Profile
+              </a>
+              <a href="https://learn.microsoft.com/en-us/users/MidhunV-9469" target="_blank" rel="noopener noreferrer"
+                class="node-link" aria-label="Microsoft Learn Profile">
+                <i class='bx bxl-windows'></i> Microsoft Learn
+              </a>
+            </div>
+
+            <!-- BELOW: Credential Radar Command Center -->
+            <div class="credential-radar-col">
+              <div class="radar-section-title">
+                <i class='bx bx-radar'></i>
+                <span>CREDENTIAL RADAR</span>
+              </div>
+
+              <div class="radar-container" id="credentialRadar" aria-label="Credential Radar displaying 21 cybersecurity badges in orbital rings">
+                <!-- Radar rings -->
+                <div class="radar-ring radar-ring-1"></div>
+                <div class="radar-ring radar-ring-2"></div>
+                <div class="radar-ring radar-ring-3"></div>
+                <div class="radar-ring radar-ring-4"></div>
+                <!-- Radar sweep -->
+                <div class="radar-sweep"></div>
+                <!-- Scanline overlay -->
+                <div class="radar-scanlines"></div>
+                <!-- Center node -->
+                <div class="radar-center">
+                  <div class="radar-center-text">
+                    <span class="center-title">CREDENTIAL<br>NETWORK</span>
+                    <span class="center-count">21 BADGES<br>ACTIVE</span>
+                  </div>
+                  <div class="center-pulse"></div>
+                </div>
+
+                <!-- INNER RING badges (orbit-1) -->
+                <div class="badge-orbit orbit-inner" id="orbit-inner" aria-label="Inner orbital ring">
+                  <button class="badge-node" data-ring="inner" data-idx="0"
+                    data-name="Junior Cybersecurity Analyst" data-issuer="Cisco" data-category="Career Path"
+                    aria-label="Junior Cybersecurity Analyst badge by Cisco">
+                    <img src="assets/images/junior-cybersecurity-analyst-career-path.1.png"
+                      alt="Junior Cybersecurity Analyst Career Path - Cisco" loading="lazy">
+                    <div class="badge-tooltip">
+                      <strong>Junior Cybersecurity Analyst</strong>
+                      <span>Issuer: Cisco</span>
+                      <span>Status: Verified</span>
+                      <span>Category: Career Path</span>
+                    </div>
+                  </button>
+                  <button class="badge-node" data-ring="inner" data-idx="1"
+                    data-name="Ethical Hacker" data-issuer="Cisco" data-category="Offensive Security"
+                    aria-label="Ethical Hacker badge by Cisco">
+                    <img src="assets/images/ethical-hacker.png" alt="Ethical Hacker - Cisco" loading="lazy">
+                    <div class="badge-tooltip">
+                      <strong>Ethical Hacker</strong>
+                      <span>Issuer: Cisco</span>
+                      <span>Status: Verified</span>
+                      <span>Category: Offensive Security</span>
+                    </div>
+                  </button>
+                  <button class="badge-node" data-ring="inner" data-idx="2"
+                    data-name="Cyber Threat Management" data-issuer="Cisco" data-category="Threat Intelligence"
+                    aria-label="Cyber Threat Management badge by Cisco">
+                    <img src="assets/images/cyber-threat-management.png" alt="Cyber Threat Management - Cisco" loading="lazy">
+                    <div class="badge-tooltip">
+                      <strong>Cyber Threat Management</strong>
+                      <span>Issuer: Cisco</span>
+                      <span>Status: Verified</span>
+                      <span>Category: Threat Intelligence</span>
+                    </div>
+                  </button>
+                  <button class="badge-node" data-ring="inner" data-idx="3"
+                    data-name="Security Operations &amp; Management" data-issuer="IBM" data-category="SOC Operations"
+                    aria-label="Security Operations and Management badge by IBM">
+                    <img src="assets/images/security-operations-and-management.png" alt="Security Operations and Management - IBM" loading="lazy">
+                    <div class="badge-tooltip">
+                      <strong>Security Operations &amp; Management</strong>
+                      <span>Issuer: IBM</span>
+                      <span>Status: Verified</span>
+                      <span>Category: SOC Operations</span>
+                    </div>
+                  </button>
+                  <button class="badge-node" data-ring="inner" data-idx="4"
+                    data-name="Incident Response &amp; Systems Forensics" data-issuer="IBM" data-category="Forensics"
+                    aria-label="Incident Response and Systems Forensics badge by IBM">
+                    <img src="assets/images/incident-response-and-systems-forensics.png" alt="Incident Response and Systems Forensics - IBM" loading="lazy">
+                    <div class="badge-tooltip">
+                      <strong>Incident Response &amp; Systems Forensics</strong>
+                      <span>Issuer: IBM</span>
+                      <span>Status: Verified</span>
+                      <span>Category: Forensics</span>
+                    </div>
+                  </button>
+                </div>
+
+                <!-- MIDDLE RING badges (orbit-2) -->
+                <div class="badge-orbit orbit-middle" id="orbit-middle" aria-label="Middle orbital ring">
+                  <button class="badge-node" data-ring="middle" data-idx="0"
+                    data-name="Endpoint Security" data-issuer="Cisco" data-category="Endpoint Protection"
+                    aria-label="Endpoint Security badge by Cisco">
+                    <img src="assets/images/endpoint-security.png" alt="Endpoint Security - Cisco" loading="lazy">
+                    <div class="badge-tooltip">
+                      <strong>Endpoint Security</strong>
+                      <span>Issuer: Cisco</span>
+                      <span>Status: Verified</span>
+                      <span>Category: Endpoint Protection</span>
+                    </div>
+                  </button>
+                  <button class="badge-node" data-ring="middle" data-idx="1"
+                    data-name="Vulnerability Management" data-issuer="IBM" data-category="Risk Management"
+                    aria-label="Vulnerability Management badge by IBM">
+                    <img src="assets/images/vulnerability-management.png" alt="Vulnerability Management - IBM" loading="lazy">
+                    <div class="badge-tooltip">
+                      <strong>Vulnerability Management</strong>
+                      <span>Issuer: IBM</span>
+                      <span>Status: Verified</span>
+                      <span>Category: Risk Management</span>
+                    </div>
+                  </button>
+                  <button class="badge-node" data-ring="middle" data-idx="2"
+                    data-name="Cloud Security" data-issuer="IBM" data-category="Cloud Security"
+                    aria-label="Cloud Security badge by IBM">
+                    <img src="assets/images/cloud-security.png" alt="Cloud Security - IBM" loading="lazy">
+                    <div class="badge-tooltip">
+                      <strong>Cloud Security</strong>
+                      <span>Issuer: IBM</span>
+                      <span>Status: Verified</span>
+                      <span>Category: Cloud Security</span>
+                    </div>
+                  </button>
+                  <button class="badge-node" data-ring="middle" data-idx="3"
+                    data-name="System &amp; Network Security" data-issuer="IBM" data-category="Network Security"
+                    aria-label="System and Network Security badge by IBM">
+                    <img src="assets/images/system-and-network-security.png" alt="System and Network Security - IBM" loading="lazy">
+                    <div class="badge-tooltip">
+                      <strong>System &amp; Network Security</strong>
+                      <span>Issuer: IBM</span>
+                      <span>Status: Verified</span>
+                      <span>Category: Network Security</span>
+                    </div>
+                  </button>
+                  <button class="badge-node" data-ring="middle" data-idx="4"
+                    data-name="Governance, Risk &amp; Compliance" data-issuer="IBM" data-category="GRC"
+                    aria-label="Governance Risk Compliance and Data Privacy badge by IBM">
+                    <img src="assets/images/governance-risk-compliance-and-data-privacy.png" alt="Governance Risk Compliance and Data Privacy - IBM" loading="lazy">
+                    <div class="badge-tooltip">
+                      <strong>Governance, Risk &amp; Compliance</strong>
+                      <span>Issuer: IBM</span>
+                      <span>Status: Verified</span>
+                      <span>Category: GRC</span>
+                    </div>
+                  </button>
+                  <button class="badge-node" data-ring="middle" data-idx="5"
+                    data-name="Cybersecurity Fundamentals" data-issuer="IBM" data-category="Fundamentals"
+                    aria-label="Cybersecurity Fundamentals badge by IBM">
+                    <img src="assets/images/cybersecurity-fundamentals (1).png" alt="Cybersecurity Fundamentals - IBM" loading="lazy">
+                    <div class="badge-tooltip">
+                      <strong>Cybersecurity Fundamentals</strong>
+                      <span>Issuer: IBM</span>
+                      <span>Status: Verified</span>
+                      <span>Category: Fundamentals</span>
+                    </div>
+                  </button>
+                  <button class="badge-node" data-ring="middle" data-idx="6"
+                    data-name="IBM SkillsBuild Cybersecurity" data-issuer="IBM" data-category="Certificate"
+                    aria-label="IBM SkillsBuild Cybersecurity Certificate badge">
+                    <img src="assets/images/ibm-skillsbuild-cybersecurity-certificate (1).png" alt="IBM SkillsBuild Cybersecurity Certificate" loading="lazy">
+                    <div class="badge-tooltip">
+                      <strong>IBM SkillsBuild Cybersecurity</strong>
+                      <span>Issuer: IBM</span>
+                      <span>Status: Verified</span>
+                      <span>Category: Certificate</span>
+                    </div>
+                  </button>
+                </div>
+
+                <!-- OUTER RING badges (orbit-3) -->
+                <div class="badge-orbit orbit-outer" id="orbit-outer" aria-label="Outer orbital ring">
+                  <button class="badge-node" data-ring="outer" data-idx="0"
+                    data-name="AI Upskilling - Qualcomm" data-issuer="Qualcomm" data-category="Artificial Intelligence"
+                    aria-label="AI Upskilling Technical Foundations badge by Qualcomm">
+                    <img src="assets/images/ai-upskilling-certificate-technical-foundations.png" alt="AI Upskilling Technical Foundations - Qualcomm" loading="lazy">
+                    <div class="badge-tooltip">
+                      <strong>AI Upskilling - Qualcomm</strong>
+                      <span>Issuer: Qualcomm</span>
+                      <span>Status: Verified</span>
+                      <span>Category: Artificial Intelligence</span>
+                    </div>
+                  </button>
+                  <button class="badge-node" data-ring="outer" data-idx="1"
+                    data-name="AI Fundamentals" data-issuer="IBM" data-category="Artificial Intelligence"
+                    aria-label="Artificial Intelligence Fundamentals badge by IBM">
+                    <img src="assets/images/artificial-intelligence-fundamentals.png" alt="Artificial Intelligence Fundamentals - IBM" loading="lazy">
+                    <div class="badge-tooltip">
+                      <strong>AI Fundamentals</strong>
+                      <span>Issuer: IBM</span>
+                      <span>Status: Verified</span>
+                      <span>Category: Artificial Intelligence</span>
+                    </div>
+                  </button>
+                  <button class="badge-node" data-ring="outer" data-idx="2"
+                    data-name="Networking Basics" data-issuer="Cisco" data-category="Networking"
+                    aria-label="Networking Basics badge by Cisco">
+                    <img src="assets/images/networking-basics.png" alt="Networking Basics - Cisco" loading="lazy">
+                    <div class="badge-tooltip">
+                      <strong>Networking Basics</strong>
+                      <span>Issuer: Cisco</span>
+                      <span>Status: Verified</span>
+                      <span>Category: Networking</span>
+                    </div>
+                  </button>
+                  <button class="badge-node" data-ring="outer" data-idx="3"
+                    data-name="Networking Devices &amp; Config" data-issuer="Cisco" data-category="Networking"
+                    aria-label="Networking Devices and Initial Configuration badge by Cisco">
+                    <img src="assets/images/networking-devices-and-initial-configuration.png" alt="Networking Devices and Initial Configuration - Cisco" loading="lazy">
+                    <div class="badge-tooltip">
+                      <strong>Networking Devices &amp; Config</strong>
+                      <span>Issuer: Cisco</span>
+                      <span>Status: Verified</span>
+                      <span>Category: Networking</span>
+                    </div>
+                  </button>
+                  <button class="badge-node" data-ring="outer" data-idx="4"
+                    data-name="Introduction to Cybersecurity" data-issuer="Cisco" data-category="Fundamentals"
+                    aria-label="Introduction to Cybersecurity badge by Cisco">
+                    <img src="assets/images/introduction-to-cybersecurity.png" alt="Introduction to Cybersecurity - Cisco" loading="lazy">
+                    <div class="badge-tooltip">
+                      <strong>Introduction to Cybersecurity</strong>
+                      <span>Issuer: Cisco</span>
+                      <span>Status: Verified</span>
+                      <span>Category: Fundamentals</span>
+                    </div>
+                  </button>
+                  <button class="badge-node" data-ring="outer" data-idx="5"
+                    data-name="Introduction to Threat Landscape" data-issuer="Fortinet" data-category="Threat Intelligence"
+                    aria-label="Introduction to Threat Landscape badge by Fortinet">
+                    <img src="assets/images/introduction-to-the-threat-landscape-3-0.png" alt="Introduction to the Threat Landscape - Fortinet" loading="lazy">
+                    <div class="badge-tooltip">
+                      <strong>Introduction to Threat Landscape</strong>
+                      <span>Issuer: Fortinet</span>
+                      <span>Status: Verified</span>
+                      <span>Category: Threat Intelligence</span>
+                    </div>
+                  </button>
+                  <button class="badge-node" data-ring="outer" data-idx="6"
+                    data-name="Getting Started in Cybersecurity" data-issuer="Fortinet" data-category="Fundamentals"
+                    aria-label="Getting Started in Cybersecurity badge by Fortinet">
+                    <img src="assets/images/getting-started-in-cybersecurity-3-0.png" alt="Getting Started in Cybersecurity - Fortinet" loading="lazy">
+                    <div class="badge-tooltip">
+                      <strong>Getting Started in Cybersecurity</strong>
+                      <span>Issuer: Fortinet</span>
+                      <span>Status: Verified</span>
+                      <span>Category: Fundamentals</span>
+                    </div>
+                  </button>
+                  <button class="badge-node" data-ring="outer" data-idx="7"
+                    data-name="Fortinet Certified Fundamentals" data-issuer="Fortinet" data-category="Certification"
+                    aria-label="Fortinet Certified Fundamentals badge by Fortinet">
+                    <img src="assets/images/fortinet-certified-fundamentals-cybersecurity.png" alt="Fortinet Certified Fundamentals - Fortinet" loading="lazy">
+                    <div class="badge-tooltip">
+                      <strong>Fortinet Certified Fundamentals</strong>
+                      <span>Issuer: Fortinet</span>
+                      <span>Status: Verified</span>
+                      <span>Category: Certification</span>
+                    </div>
+                  </button>
+                  <button class="badge-node" data-ring="outer" data-idx="8"
+                    data-name="Google Cloud Compute" data-issuer="Google Cloud" data-category="Cloud Computing"
+                    aria-label="Google Cloud Compute Skill Badge by Google Cloud">
+                    <img src="assets/images/the-basics-of-google-cloud-compute-skill-badge.png" alt="Google Cloud Compute Skill Badge" loading="lazy">
+                    <div class="badge-tooltip">
+                      <strong>Google Cloud Compute</strong>
+                      <span>Issuer: Google Cloud</span>
+                      <span>Status: Verified</span>
+                      <span>Category: Cloud Computing</span>
+                    </div>
+                  </button>
+                </div>
+              </div><!-- end radar-container -->
+
+              <!-- Credential Telemetry Status -->
+              <div class="credential-telemetry">
+                <div class="telemetry-title">
+                  <i class='bx bx-broadcast'></i> CREDENTIAL TELEMETRY
+                </div>
+                <div class="telemetry-stats-grid">
+                  <div class="tel-stat"><span class="tel-label">Nodes Online</span><span class="tel-val">21</span></div>
+                  <div class="tel-stat"><span class="tel-label">Verified Credentials</span><span class="tel-val">21</span></div>
+                  <div class="tel-stat"><span class="tel-label">Status</span><span class="tel-val active">ACTIVE</span></div>
+                  <div class="tel-stat"><span class="tel-label">Knowledge Coverage</span><span class="tel-val expanding">EXPANDING</span></div>
+                </div>
+              </div>
+            </div><!-- end credential-radar-col -->
+
+          </div><!-- end panel-content -->
+        </div><!-- end telemetry-panel -->
+
+        <!-- Badge Modal -->
+        <div id="badgeModal" class="badge-modal-overlay" role="dialog" aria-modal="true" aria-label="Badge detail modal" aria-hidden="true">
+          <div class="badge-modal-box">
+            <div class="modal-scan-line"></div>
+            <button class="modal-close-btn" id="modalCloseBtn" aria-label="Close badge modal">
+              <i class='bx bx-x'></i>
+            </button>
+            <div class="modal-inner">
+              <div class="modal-badge-img-wrap">
+                <img id="modalBadgeImg" src="" alt="" class="modal-badge-img">
+                <div class="modal-img-glow"></div>
+              </div>
+              <div class="modal-badge-info">
+                <div class="modal-status-bar">
+                  <i class='bx bx-check-shield'></i>
+                  <span>VERIFIED CREDENTIAL</span>
+                </div>
+                <h3 id="modalBadgeName" class="modal-badge-title"></h3>
+                <div class="modal-meta">
+                  <div class="modal-meta-row"><span class="meta-key">Issuer</span><span class="meta-val" id="modalIssuer"></span></div>
+                  <div class="modal-meta-row"><span class="meta-key">Category</span><span class="meta-val" id="modalCategory"></span></div>
+                  <div class="modal-meta-row"><span class="meta-key">Achievement</span><span class="meta-val neon">Earned &amp; Verified</span></div>
+                  <div class="modal-meta-row"><span class="meta-key">Status</span><span class="meta-val active">● ACTIVE</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- PROFESSIONAL DISCLAIMER -->
+  <section class="disclaimer-section section"
+    style="padding: 2rem 0; text-align: center; border-top: 1px solid rgba(0, 255, 204, 0.2); margin-top: 2rem;">
+    <div class="container" style="max-width: 800px; margin: 0 auto; padding: 0 1rem;">
+      <p style="font-size: 0.85rem; color: #94a3b8; opacity: 0.9; line-height: 1.5;">
+        <i class='bx bx-info-circle' style="color: #00ffcc; margin-right: 5px;"></i>
+        All projects, dashboards, alerts, telemetry, and security investigations displayed on this website are
+        educational demonstrations conducted in personal lab environments. No organizational, customer, or production
+        data is displayed.
+      </p>
+    </div>
+  </section>
+
+  <!-- SECURE COMMUNICATION CHANNELS -->
+  <footer class="soc-footer">
+    <div class="comms-panel" data-aos="fade-up">
+      <h3><i class='bx bx-broadcast'></i> Secure Communication Channels</h3>
+      <div class="contact-container">
+        <!-- Contact Form -->
+        <div class="contact-form-wrapper">
+          <div class="form-scan-line"></div>
+          <form id="contactForm" class="cyber-form" novalidate>
+            <div class="form-group">
+              <input type="text" id="senderName" name="senderName" required placeholder=" " autocomplete="off">
+              <label for="senderName">Full Name</label>
+              <div class="input-focus-border"></div>
+            </div>
+            <div class="form-group">
+              <input type="email" id="senderEmail" name="senderEmail" required placeholder=" " autocomplete="off">
+              <label for="senderEmail">Email Address</label>
+              <div class="input-focus-border"></div>
+            </div>
+            <div class="form-group">
+              <input type="text" id="subject" name="subject" required placeholder=" " autocomplete="off">
+              <label for="subject">Subject</label>
+              <div class="input-focus-border"></div>
+            </div>
+            <div class="form-group">
+              <textarea id="message" name="message" required placeholder=" " autocomplete="off" rows="4"></textarea>
+              <label for="message">Message Payload</label>
+              <div class="input-focus-border"></div>
+            </div>
+
+            <!-- Cloudflare Turnstile / Google reCAPTCHA Placeholder -->
+            <div class="form-group captcha-container" style="margin-bottom: 1.5rem;">
+              <!-- <div class="cf-turnstile" data-sitekey="YOUR_SITE_KEY"></div> -->
+            </div>
+
+            <button type="submit" class="cyber-btn primary submit-btn" id="submitBtn">
+              <span class="btn-text">TRANSMIT_DATA()</span>
+              <span class="btn-glitch"></span>
+              <i class='bx bx-loader-alt bx-spin loader-icon'
+                style="display: none; font-size: 1.2rem; margin-left: 8px;"></i>
+            </button>
+            <div id="formStatus" class="terminal-status" aria-live="polite" style="display: none;"></div>
+          </form>
+        </div>
+
+        <!-- Social Links -->
+        <div class="social-comms">
+          <a href="https://linkedin.com/in/midhun-v-042453376" target="_blank" rel="noopener noreferrer"
+            class="comm-channel" aria-label="LinkedIn Profile">
+            <i class='bx bxl-linkedin'></i>
+            <span>Professional_Net</span>
+          </a>
+          <a href="https://github.com/whitehatwolf" target="_blank" rel="noopener noreferrer" class="comm-channel"
+            aria-label="GitHub Repository">
+            <i class='bx bxl-github'></i>
+            <span>Code_Repository</span>
+          </a>
+        </div>
+      </div>
+      <div class="credly-verify">
+        <a href="https://www.credly.com/users/midhunv" target="_blank" rel="noopener noreferrer"
+          aria-label="Verify Credentials via Credly">
+          <i class='bx bx-check-shield'></i> Verify Global Credentials via Credly
+        </a>
+      </div>
+    </div>
+
+    <div class="sys-footer">
+      <span>SYS_ADMIN: Midhun V</span>
+      <span>STATUS: <span style="color:#00ffcc">OPERATIONAL</span></span>
+      <span>© 2026 Midhun V. All Rights Reserved.</span>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+
+</html>
